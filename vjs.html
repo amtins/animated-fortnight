@@ -1,0 +1,57 @@
+<style>
+  html,
+  body {
+    background-color: #222;
+    min-height: 100vh;
+    margin: 0;
+  }
+  body {
+    display: grid;
+    place-content: center;
+  }
+</style>
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/video.js@7.16.0/dist/video-js.css"
+/>
+
+<video
+  id="player"
+  class="video-js"
+  width="640"
+  height="360"
+  controls
+  muted
+></video>
+
+<script type="module">
+  // The internet is sweet
+  import 'https://unpkg.com/video.js@7.21.0/dist/video.js';
+
+  const player = videojs('player');
+
+  player.on(
+    [
+      'loadstart',
+      'progress',
+      'suspend',
+      'abort',
+      'emptied',
+      'stalled',
+      'loadedmetadata',
+      'loadeddata',
+      'canplay',
+      'canplaythrough',
+      'waiting',
+      'durationchange',
+    ],
+    ({ type }) => {
+      console.log('videojs', type);
+    }
+  );
+
+  setTimeout(() => {
+    player.src('https://archive.org/download/ElephantsDream/ed_hd.mp4');
+  }, 5_000);
+</script>
