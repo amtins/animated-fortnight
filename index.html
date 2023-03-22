@@ -1,0 +1,40 @@
+<style>
+  html,
+  body {
+    background-color: #222;
+    min-height: 100vh;
+    margin: 0;
+  }
+  body {
+    display: grid;
+    place-content: center;
+  }
+</style>
+<video id="player" width="640" height="360" controls muted></video>
+
+<script>
+  const player = document.querySelector('#player');
+
+  [
+    'loadstart',
+    'progress',
+    'suspend',
+    'abort',
+    'emptied',
+    'stalled',
+    'loadedmetadata',
+    'loadeddata',
+    'canplay',
+    'canplaythrough',
+    'waiting',
+    'durationchange',
+  ].forEach((event) => {
+    player.addEventListener(event, ({ type }) => {
+      console.log('htmlVideoElement', type);
+    });
+  });
+
+  setTimeout(() => {
+    player.src = 'https://archive.org/download/ElephantsDream/ed_hd.mp4';
+  }, 5_000);
+</script>
